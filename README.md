@@ -1,2 +1,2 @@
 # Swift-Async-Await-Experiments
-Experiemnts with Swift's new async/await feature (SE 0296)
+Experiments with Swift's new async/await feature (SE 0296)

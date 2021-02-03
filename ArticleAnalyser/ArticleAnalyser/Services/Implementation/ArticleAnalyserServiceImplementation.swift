@@ -82,10 +82,6 @@ public class ArticleAnalyserService: ArticleAnalyser {
     }
   }
 
-  
-  func fetchImage(for tags: [Tag], completion: (Image) -> Void) {
-  }
-  
   func inferTags(from text: String, completion: ([Tag]) -> Void) {
     let entities = [
       "Swift": ["Swift", "SwiftUI"],

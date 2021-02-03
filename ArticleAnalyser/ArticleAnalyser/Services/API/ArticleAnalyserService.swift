@@ -32,9 +32,6 @@ protocol ArticleAnalyser {
   
   // try to extract image meta tag
   func extractImage(from url: String, completion: @escaping (Result<String, AnalyserError>) -> Void)
-  
-  // fetch an image for the given tags
-  func fetchImage(for tags: [Tag], completion: (Image) -> Void)
 }
 
 extension ArticleAnalyser {

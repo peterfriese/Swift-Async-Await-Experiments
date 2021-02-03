@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		881441A725CAF41300E84E7B /* OpenGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 881441A625CAF41300E84E7B /* OpenGraph */; };
 		881441AB25CAF77300E84E7B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 881441AA25CAF77300E84E7B /* Kingfisher */; };
+		881441AF25CB007300E84E7B /* AsyncArticleAnalyserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881441AE25CB007300E84E7B /* AsyncArticleAnalyserService.swift */; };
+		881EF1D825CB03CF00B9C8B7 /* AsyncArticleAnalyserImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881EF1D725CB03CF00B9C8B7 /* AsyncArticleAnalyserImplementation.swift */; };
+		881EF1DC25CB09A200B9C8B7 /* URLSession+Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881EF1DB25CB09A200B9C8B7 /* URLSession+Concurrency.swift */; };
 		8857E17525C948F200202BA6 /* ArticleAnalyserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857E17425C948F200202BA6 /* ArticleAnalyserApp.swift */; };
 		8857E17725C948F200202BA6 /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857E17625C948F200202BA6 /* ArticleListView.swift */; };
 		8857E17925C948F400202BA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8857E17825C948F400202BA6 /* Assets.xcassets */; };
@@ -24,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		881441AE25CB007300E84E7B /* AsyncArticleAnalyserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncArticleAnalyserService.swift; sourceTree = "<group>"; };
+		881EF1D725CB03CF00B9C8B7 /* AsyncArticleAnalyserImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncArticleAnalyserImplementation.swift; sourceTree = "<group>"; };
+		881EF1DB25CB09A200B9C8B7 /* URLSession+Concurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Concurrency.swift"; sourceTree = "<group>"; };
 		8857E17125C948F200202BA6 /* ArticleAnalyser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArticleAnalyser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8857E17425C948F200202BA6 /* ArticleAnalyserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleAnalyserApp.swift; sourceTree = "<group>"; };
 		8857E17625C948F200202BA6 /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
@@ -53,6 +59,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		881EF1D325CB03A300B9C8B7 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8857E18A25C94E6E00202BA6 /* ArticleAnalyserService.swift */,
+				881441AE25CB007300E84E7B /* AsyncArticleAnalyserService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		881EF1D525CB03A800B9C8B7 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				8857E1A325C9BC0500202BA6 /* ArticleAnalyserServiceImplementation.swift */,
+				881EF1D725CB03CF00B9C8B7 /* AsyncArticleAnalyserImplementation.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		881EF1DA25CB099100B9C8B7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				881EF1DB25CB09A200B9C8B7 /* URLSession+Concurrency.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		8857E16825C948F200202BA6 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +104,7 @@
 		8857E17325C948F200202BA6 /* ArticleAnalyser */ = {
 			isa = PBXGroup;
 			children = (
+				881EF1DA25CB099100B9C8B7 /* Extensions */,
 				8857E18925C94E5900202BA6 /* Services */,
 				8857E18425C9493B00202BA6 /* Models */,
 				889C5A3825C9F4D300AE0142 /* ViewModels */,
@@ -104,8 +137,8 @@
 		8857E18925C94E5900202BA6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8857E18A25C94E6E00202BA6 /* ArticleAnalyserService.swift */,
-				8857E1A325C9BC0500202BA6 /* ArticleAnalyserServiceImplementation.swift */,
+				881EF1D325CB03A300B9C8B7 /* API */,
+				881EF1D525CB03A800B9C8B7 /* Implementation */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -210,9 +243,12 @@
 				8857E17725C948F200202BA6 /* ArticleListView.swift in Sources */,
 				8857E18625C9494E00202BA6 /* Article.swift in Sources */,
 				8857E1A125C9B48C00202BA6 /* ArticleDetailsView.swift in Sources */,
+				881EF1D825CB03CF00B9C8B7 /* AsyncArticleAnalyserImplementation.swift in Sources */,
+				881EF1DC25CB09A200B9C8B7 /* URLSession+Concurrency.swift in Sources */,
 				889C5A3A25C9F51000AE0142 /* AppState.swift in Sources */,
 				889C5A3525C9EEA400AE0142 /* Link.swift in Sources */,
 				8857E17525C948F200202BA6 /* ArticleAnalyserApp.swift in Sources */,
+				881441AF25CB007300E84E7B /* AsyncArticleAnalyserService.swift in Sources */,
 				8857E1A425C9BC0500202BA6 /* ArticleAnalyserServiceImplementation.swift in Sources */,
 				8857E18B25C94E6E00202BA6 /* ArticleAnalyserService.swift in Sources */,
 				889C5A3725C9EFD200AE0142 /* AddArticleView.swift in Sources */,
@@ -353,6 +389,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-Xfrontend -enable-experimental-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.peterfriese.ArticleAnalyser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -375,6 +412,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-Xfrontend -enable-experimental-concurrency";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.peterfriese.ArticleAnalyser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

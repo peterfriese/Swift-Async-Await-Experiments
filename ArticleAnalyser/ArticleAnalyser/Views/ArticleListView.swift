@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ArticleListView: View {
   @EnvironmentObject var appState: AppState
@@ -27,7 +28,24 @@ struct ArticleListView: View {
       List(appState.articles) { article in
         VStack {
           NavigationLink(destination: ArticleDetailsView(article: .constant(article))) {
-            Text(article.title)
+            HStack {
+              Text(article.title)
+              Spacer()
+              KFImage(article.imageUrl)
+                .cancelOnDisappear(true)
+                .placeholder {
+                  Image(systemName: "scribble.variable")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding()
+                    .frame(width: 75, height: 75, alignment: .center)
+                    .background(Color("AccentColor"))
+                }
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 75, height: 75, alignment: .center)
+                .cornerRadius(8.0)
+            }
           }
         }
       }

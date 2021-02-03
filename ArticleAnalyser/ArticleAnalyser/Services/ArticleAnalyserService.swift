@@ -14,6 +14,7 @@ enum AnalyserError: Error {
   case badURL
   case downloadFailed
   case textExtractionFailed(_ error: Error)
+  case imageExtractionFailed
 }
 
 protocol ArticleAnalyser {
@@ -28,6 +29,9 @@ protocol ArticleAnalyser {
   
   // analyse the text and return the tags we inferred
   func inferTags(from text: String, completion: ([Tag]) -> Void)
+  
+  // try to extract image meta tag
+  func extractImage(from url: String, completion: @escaping (Result<String, AnalyserError>) -> Void)
   
   // fetch an image for the given tags
   func fetchImage(for tags: [Tag], completion: (Image) -> Void)
@@ -50,9 +54,16 @@ extension ArticleAnalyser {
               case .failure(let error):
                 print(error.localizedDescription)
               case .success(let text):
-                self.inferTags(from: text) { tags in
-                  let article = Article(url: url, title: title, tags: tags)
-                  completion(article)
+                self.extractImage(from: url) { result in
+                  switch result {
+                  case .failure(let error):
+                    print(error.localizedDescription)
+                  case .success(let imageUrl):
+                    self.inferTags(from: text) { tags in
+                      let article = Article(url: url, title: title, tags: tags, imageUrlString: imageUrl)
+                      completion(article)
+                    }
+                  }
                 }
               }
             }

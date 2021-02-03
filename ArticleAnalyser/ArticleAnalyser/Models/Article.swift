@@ -14,13 +14,29 @@ struct Tag {
   var type: NLTag
 }
 
+extension Tag: Equatable, Hashable {
+  static func == (lhs: Self, rhs: Self) -> Bool {
+    lhs.title == rhs.title
+  }
+}
+
+extension Sequence where Iterator.Element: Hashable {
+  func unique() -> [Iterator.Element] {
+    var seen: Set<Iterator.Element> = []
+    return filter { seen.insert($0).inserted }
+  }
+}
+
 struct Article: Identifiable {
   var id = UUID().uuidString
   var url: String
   var title: String
   var tags: [Tag]
-  var image: Image?
-  
+  var imageUrlString: String?
+  var imageUrl: URL? {
+    guard let imageUrlString = imageUrlString else { return nil }
+    return URL(string: imageUrlString)
+  }
 }
 
 extension Article {

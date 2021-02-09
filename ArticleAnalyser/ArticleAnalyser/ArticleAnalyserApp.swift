@@ -9,11 +9,9 @@ import SwiftUI
 
 @main
 struct ArticleAnalyserApp: App {
-  @StateObject var appState = AppState()
-  
   var body: some Scene {
     WindowGroup {
-      ArticleListView().environmentObject(appState)
+      ArticleListView()
     }
   }
 }

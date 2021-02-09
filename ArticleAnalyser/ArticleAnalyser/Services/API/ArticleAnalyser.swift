@@ -15,6 +15,7 @@ enum AnalyserError: Error {
   case downloadFailed
   case textExtractionFailed(_ error: Error)
   case imageExtractionFailed
+  case metaDataExtractionError(_ error: Error)
 }
 
 protocol ArticleAnalyser {
@@ -22,10 +23,10 @@ protocol ArticleAnalyser {
   func fetchArticle(from url: String, completion: @escaping (Result<String, AnalyserError>) -> Void)
   
   // extract just the body of the web page
-  func extractText(from html: String, completion: @escaping (Result<String, AnalyserError>) -> Void)
+  func extractText(from html: String, completion: (Result<String, AnalyserError>) -> Void)
   
   // extract the title
-  func extractTitle(from html: String, completion: @escaping (Result<String, AnalyserError>) -> Void)
+  func extractTitle(from html: String, completion: (Result<String, AnalyserError>) -> Void)
   
   // analyse the text and return the tags we inferred
   func inferTags(from text: String, completion: ([Tag]) -> Void)

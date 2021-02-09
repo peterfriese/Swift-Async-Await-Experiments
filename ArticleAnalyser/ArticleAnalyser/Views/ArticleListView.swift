@@ -9,23 +9,23 @@ import SwiftUI
 import Kingfisher
 
 struct ArticleListView: View {
-  @EnvironmentObject var appState: AppState
+  @StateObject var viewModel = ArticlesViewModel()
   
   @State private var isAddArticleViewPresented = false
   
   @ViewBuilder
   var progress: some View {
-    if appState.isFetching {
+    if viewModel.isFetching {
       ProgressView()
     }
     else {
       EmptyView()
     }
   }
-  
+
   var body: some View {
     NavigationView {
-      List(appState.articles) { article in
+      List(viewModel.articles) { article in
         VStack {
           NavigationLink(destination: ArticleDetailsView(article: .constant(article))) {
             HStack {
@@ -56,7 +56,7 @@ struct ArticleListView: View {
                             })
       .overlay(progress)
       .sheet(isPresented: $isAddArticleViewPresented) {
-        AddArticleView()
+        AddArticleView(viewModel: self.viewModel)
       }
     }
   }

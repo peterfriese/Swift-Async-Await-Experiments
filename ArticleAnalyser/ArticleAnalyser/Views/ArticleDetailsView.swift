@@ -12,7 +12,16 @@ struct ArticleDetailsView: View {
   
   var body: some View {
     List(article.tags, id: \.title) { tag in
-      Text(tag.title)
+      HStack {
+        Text(tag.title)
+        Spacer()
+        Text(tag.type.rawValue)
+          .padding([.horizontal], 8)
+          .padding([.vertical], 4)
+          .foregroundColor(Color(UIColor.secondaryLabel))
+          .background(Color(UIColor.secondarySystemBackground))
+          .cornerRadius(8)
+      }
     }
     .navigationTitle(article.title)
   }

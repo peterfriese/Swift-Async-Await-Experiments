@@ -28,7 +28,7 @@ extension Sequence where Iterator.Element: Hashable {
 }
 
 struct Article: Identifiable {
-  var id = UUID().uuidString
+  let id = UUID().uuidString
   var url: String
   var title: String
   var tags: [Tag]

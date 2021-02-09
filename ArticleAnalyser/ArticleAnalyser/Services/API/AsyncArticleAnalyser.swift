@@ -39,9 +39,3 @@ extension AsyncArticleAnalyser {
                    imageUrlString: imageUrl)
   }
 }
-
-
-
-
-
-

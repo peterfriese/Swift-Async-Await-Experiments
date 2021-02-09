@@ -9,12 +9,12 @@ import SwiftUI
 
 struct AddArticleView: View {
   @Environment(\.presentationMode) var presentationMode
-  @EnvironmentObject var appState: AppState
+  @ObservedObject var viewModel: ArticlesViewModel
   
   @State var newUrl: String = ""
   
   func addUrl(url: String) {
-    appState.addNewArticle(from: url)
+    viewModel.addNewArticle(from: url)
     presentationMode.wrappedValue.dismiss()
   }
   
@@ -28,7 +28,7 @@ struct AddArticleView: View {
           }
         }
         Section(header: Text("Or choose one of the following")) {
-          ForEach(appState.links) { link in
+          ForEach(viewModel.links) { link in
             Button(action: { addUrl(url: link.url) }) {
               Text(link.url)
             }
@@ -43,7 +43,7 @@ struct AddArticleView: View {
 struct AddArticleView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
-      AddArticleView()
+      AddArticleView(viewModel: ArticlesViewModel())
     }
   }
 }

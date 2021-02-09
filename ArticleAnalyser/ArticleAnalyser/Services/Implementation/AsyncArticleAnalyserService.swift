@@ -10,7 +10,6 @@ import SwiftSoup
 import NaturalLanguage
 import OpenGraph
 
-
 public class AsyncArticleAnalyserService: AsyncArticleAnalyser {
   func fetchArticle(from url: String) async throws -> String {
     guard let url =  URL(string: url) else {
@@ -35,8 +34,8 @@ public class AsyncArticleAnalyserService: AsyncArticleAnalyser {
     return try await withUnsafeThrowingContinuation { continuation in
       do {
         let document = try SwiftSoup.parse(html)
-        let title = try document.title()
-        continuation.resume(returning: title)
+        let text = try document.text()
+        continuation.resume(returning: text)
       }
       catch {
         continuation.resume(throwing: error)
@@ -61,9 +60,10 @@ public class AsyncArticleAnalyserService: AsyncArticleAnalyser {
     return await withUnsafeContinuation { continuation in
       let entities = [
         "Swift": ["Swift", "SwiftUI"],
-        "Google Developer Advocate" : ["David East", "Peter Friese", "Todd Kerpelmann"],
-        "Programming Language": ["Swift", "JavaScript", "TypeScript"],
+        "Google Developer Advocate" : ["Todd Kerpelman", "David East", "Sumit Chandel", "Patrick Martin", "Peter Friese"],
+        "Programming Language": ["Swift", "JavaScript", "TypeScript", "Java", "C#"],
         "Functional Reactive Programming": ["Combine"],
+        "concurrency": ["async", "await", "async/await"],
         "Sign in with Apple": ["Sign in with Apple"],
         "Firebase Authentication": ["Firebase Authentication"],
       ]
@@ -112,10 +112,10 @@ public class AsyncArticleAnalyserService: AsyncArticleAnalyser {
             continuation.resume(returning: resultImage)
           }
           else {
-            continuation.resume(throwing: AnalyserError.imageExtractionFailed)
+            continuation.resume(returning: "")
           }
         case .failure(let error):
-          print(error)
+          continuation.resume(throwing: AnalyserError.metaDataExtractionError(error))
         }
       }
     }

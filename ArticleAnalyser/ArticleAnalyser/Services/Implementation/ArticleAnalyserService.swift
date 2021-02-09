@@ -29,7 +29,7 @@ public class ArticleAnalyserService: ArticleAnalyser {
     }.resume()
   }
   
-  func extractTitle(from html: String, completion: @escaping (Result<String, AnalyserError>) -> Void) {
+  func extractTitle(from html: String, completion: (Result<String, AnalyserError>) -> Void) {
     do {
       let document = try SwiftSoup.parse(html)
       let title = try document.title()
@@ -40,7 +40,7 @@ public class ArticleAnalyserService: ArticleAnalyser {
     }
   }
   
-  func extractText(from html: String, completion: @escaping (Result<String, AnalyserError>) -> Void) {
+  func extractText(from html: String, completion: (Result<String, AnalyserError>) -> Void) {
     do {
       let document = try SwiftSoup.parse(html)
       let text = try document.text()
@@ -74,10 +74,10 @@ public class ArticleAnalyserService: ArticleAnalyser {
           completion(.success(resultImage))
         }
         else {
-          completion(.failure(AnalyserError.imageExtractionFailed))
+          completion(.success(""))
         }
       case .failure(let error):
-        print(error)
+        completion(.failure(AnalyserError.metaDataExtractionError(error)))
       }
     }
   }
@@ -85,9 +85,10 @@ public class ArticleAnalyserService: ArticleAnalyser {
   func inferTags(from text: String, completion: ([Tag]) -> Void) {
     let entities = [
       "Swift": ["Swift", "SwiftUI"],
-      "Google Developer Advocate" : ["David East", "Peter Friese", "Todd Kerpelmann"],
-      "Programming Language": ["Swift", "JavaScript", "TypeScript"],
+      "Google Developer Advocate" : ["Todd Kerpelman", "David East", "Sumit Chandel", "Patrick Martin", "Peter Friese"],
+      "Programming Language": ["Swift", "JavaScript", "TypeScript", "Java", "C#"],
       "Functional Reactive Programming": ["Combine"],
+      "concurrency": ["async", "await"],
       "Sign in with Apple": ["Sign in with Apple"],
       "Firebase Authentication": ["Firebase Authentication"],
     ]

@@ -16,8 +16,8 @@ class ArticlesViewModel: ObservableObject {
   private var asyncAnalyserService = AsyncArticleAnalyserService()
   
   func addNewArticle(from url: String) {
-//    performAddNewArticle(from: url)
-    performAddNewArticleAsync(from: url)
+    performAddNewArticle(from: url)
+//    performAddNewArticleAsync(from: url)
   }
   
   func performAddNewArticle(from url: String) {
@@ -30,23 +30,6 @@ class ArticlesViewModel: ObservableObject {
     }
   }
   
-  @asyncHandler func performAddNewArticleAsync(from url: String) {
-    DispatchQueue.main.async {
-      self.isFetching = true
-    }
-
-    do {
-      let article = try await asyncAnalyserService.process(url: url)
-      DispatchQueue.main.async {
-        self.articles.append(article)
-      }
-    }
-    catch {
-      print(error.localizedDescription)
-    }
-    
-    DispatchQueue.main.async {
-      self.isFetching = false
-    }
+  func performAddNewArticleAsync(from url: String) {
   }
 }

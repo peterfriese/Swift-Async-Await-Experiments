@@ -19,10 +19,8 @@
   <p align="center">
     Experiments with Swift's new async/await feature (SE 0296)
     <br />
-    <a href="https://github.com/peterfriese/Swift-Async-Await-Experiments"><strong>Explore the docs »</strong></a>
     <br />
-    <br />
-    <a href="https://github.com/peterfriese/Swift-Async-Await-Experiments">View Demo</a>
+    <a href="https://github.com/peterfriese/Swift-Async-Await-Experiments/discussions">Join the discussion</a>
     ·
     <a href="https://github.com/peterfriese/Swift-Async-Await-Experiments/issues">Report Bug</a>
     ·
@@ -36,18 +34,20 @@
 
 Experiments with Swift's new async/await feature ([SE 0296](https://github.com/apple/swift-evolution/blob/main/proposals/0296-async-await.md))
 
+[Here's an article](https://peterfriese.dev/async-await-in-swiftui/) that shows you how to use this feature.
+
 ## Requirements
 The code in this repository makes use of the experimental Swift compiler toolchain.
 
 * Xcode 12.3 or later
-* Swift Compiler Toolchain (Jan 04, 2021)
+* Swift Compiler Toolchain (Jan 04, 2021 or later)
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
 To compile and run the code, make sure to follow these steps:
 
-1. Download the experimental Swift compiler toolchain from the [Snapshots/main](https://swift.org/download/#snapshots) section on the downloads page (I use the [Jan 04 2021 development snapshot](https://swift.org/builds/development/xcode/swift-DEVELOPMENT-SNAPSHOT-2021-01-04-a/swift-DEVELOPMENT-SNAPSHOT-2021-01-04-a-osx.pkg))
+1. Download the experimental Swift compiler toolchain from the [Snapshots/main](https://swift.org/download/#snapshots) section on the downloads page (I use the [Feb 02 2021 development snapshot](https://swift.org/builds/development/xcode/swift-DEVELOPMENT-SNAPSHOT-2021-02-02-a/swift-DEVELOPMENT-SNAPSHOT-2021-02-02-a-osx.pkg))
 2. Install the toolchain by double-clicking the package
 3. Activate the toolchain in Xcode (via _Settings > Components > Toolchains_)
 

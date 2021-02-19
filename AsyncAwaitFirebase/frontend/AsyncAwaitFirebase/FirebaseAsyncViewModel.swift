@@ -25,8 +25,9 @@ class FirebaseAsyncViewModel: ObservableObject {
   @asyncHandler
   func signIn() {
     do {
-      let result = try await Auth.auth().signInAnonymously()
-      //        .signIn(withEmail: "test@test.com", password: "test1234")
+      let result = try await Auth.auth()
+//        .signInAnonymously()
+        .signIn(withEmail: "test@test.com", password: "test1234")
       let user = result.user
       print("User signed in \(user.isAnonymous ? "anonymously" : "non-anonymously") with user ID \(user.uid)")
       

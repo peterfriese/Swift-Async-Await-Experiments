@@ -23,7 +23,7 @@ struct MenuScreen: View {
           }
         }
         Section(header: Text("Cloud Firestore")) {
-          NavigationLink(destination: Text("Cloud Firestore")) {
+          NavigationLink(destination: FirestoreDemoScreen()) {
             Label("Fetch a document", systemImage: "key")
           }
         }

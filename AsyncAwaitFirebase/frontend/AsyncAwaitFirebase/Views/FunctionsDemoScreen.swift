@@ -104,6 +104,6 @@ struct FunctionsDemoScreen: View {
 
 struct FunctionsDemoScreen_Previews: PreviewProvider {
   static var previews: some View {
-    SignInDemoScreen()
+    FunctionsDemoScreen()
   }
 }

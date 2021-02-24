@@ -11,21 +11,30 @@ struct ContentView: View {
   @StateObject var viewModel = FirebaseAsyncViewModel()
   
   var body: some View {
-    Form {
-      Section(header: Text("Firebase Auth")) {
-        Text("User ID: \(viewModel.user?.uid ?? "")")
-        Button(action: viewModel.signIn) {
-          Text("Sign in")
+    NavigationView {
+      Form {
+        Section(header: Text("Firebase Auth")) {
+          Text("User ID: \(viewModel.user?.uid ?? "")")
+          Button(action: viewModel.signIn) {
+            Text("Sign in")
+          }
+          Button(action: viewModel.signOut) {
+            Text("Sign out")
+          }
         }
-        Button(action: viewModel.signOut) {
-          Text("Sign out")
+        Section(header: Text("Firebase Functions")) {
+          Button(action: viewModel.callHelloWorld) {
+            Text("Call helloWorld")
+          }
+          
+          TextField("What's your name", text: $viewModel.name)
+          Button(action: viewModel.callMultipleMethods) {
+            Text("Call helloUser")
+          }
+          Text("Greeting: \(viewModel.greeting)")
         }
       }
-      Section(header: Text("Firebase Functions")) {
-        Button(action: viewModel.callHelloFunctions) {
-          Text("Call helloWorld")
-        }
-      }
+      .navigationTitle("Firebase & async/await")
     }
   }
 }

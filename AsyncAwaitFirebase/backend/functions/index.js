@@ -9,8 +9,10 @@ const functions = require("firebase-functions");
 // });
 
 exports.helloWorld = functions.https.onCall((data, context) => {
-    return {
-        message: "Hello World from Firebase" 
-    };  
+    return "Hello World from Firebase";
+});
+  
+exports.helloUser = functions.https.onCall((data, context) => {
+    return `Hello ${data} from Firebase`;
 });
   

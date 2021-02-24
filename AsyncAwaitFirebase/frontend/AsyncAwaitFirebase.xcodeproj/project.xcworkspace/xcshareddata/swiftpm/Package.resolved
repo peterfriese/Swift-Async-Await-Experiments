@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/firebase/abseil-cpp-SwiftPM.git",
         "state": {
           "branch": null,
-          "revision": "05d8107f2971a37e6c77245b7c4c6b0a7e97bc99",
-          "version": "0.20200225.0"
+          "revision": "973d27376eedfb8f0f0a324be4b4121d44808dc9",
+          "version": null
         }
       },
       {
@@ -15,16 +15,16 @@
         "repositoryURL": "https://github.com/firebase/boringssl-SwiftPM.git",
         "state": {
           "branch": null,
-          "revision": "7bcafa2660bc58715c39637494550d1ed7cd7229",
-          "version": "0.0.7"
+          "revision": "7edd2773f9f9cc292bf9649c3f07286d69b08aee",
+          "version": null
         }
       },
       {
         "package": "Firebase",
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk",
         "state": {
-          "branch": "master",
-          "revision": "144f23e3a9ec4db6b3ca2de206bb3cdc66410d72",
+          "branch": "pb-boringssl-stdlib-fix",
+          "revision": "95540ed67c8c214068b92f7b7f42bb2d71bf82ed",
           "version": null
         }
       },
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/grpc-SwiftPM.git",
         "state": {
           "branch": null,
-          "revision": "91b62619e6c83bc5f1b99d9d60fe46b2862d3a5a",
-          "version": "1.28.2"
+          "revision": "b54af2c0d3b77209ccc8dc25af902c31a2095943",
+          "version": null
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/firebase/leveldb.git",
         "state": {
           "branch": null,
-          "revision": "fa1f25f296a766e5a789c4dacd4798dea798b2c2",
-          "version": "1.22.1"
+          "revision": "e4e8ab44a2781a3656b4b5852e71c07fd18fecfa",
+          "version": null
         }
       },
       {

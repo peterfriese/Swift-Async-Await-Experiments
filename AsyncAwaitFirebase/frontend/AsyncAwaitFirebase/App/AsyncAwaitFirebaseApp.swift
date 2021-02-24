@@ -15,7 +15,7 @@ struct AsyncAwaitFirebaseApp: App {
   }
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      MenuScreen()
     }
   }
 }

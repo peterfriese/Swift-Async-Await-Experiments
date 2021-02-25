@@ -12,11 +12,9 @@
 		8855FD2525E64BA600E72230 /* FunctionsDemoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8855FD2425E64BA600E72230 /* FunctionsDemoScreen.swift */; };
 		8855FD2725E65ED800E72230 /* FirestoreDemoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8855FD2625E65ED800E72230 /* FirestoreDemoScreen.swift */; };
 		8875A75125DBB8F00013BEEB /* AsyncAwaitFirebaseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875A75025DBB8F00013BEEB /* AsyncAwaitFirebaseApp.swift */; };
-		8875A75325DBB8F00013BEEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875A75225DBB8F00013BEEB /* ContentView.swift */; };
 		8875A75525DBB8F20013BEEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8875A75425DBB8F20013BEEB /* Assets.xcassets */; };
 		8875A75825DBB8F20013BEEB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8875A75725DBB8F20013BEEB /* Preview Assets.xcassets */; };
 		8875A76525DBBA700013BEEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8875A76425DBBA700013BEEB /* GoogleService-Info.plist */; };
-		8875A76725DBBAB30013BEEB /* FirebaseAsyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8875A76625DBBAB30013BEEB /* FirebaseAsyncViewModel.swift */; };
 		88F4B0AF25E5587E0008F02A /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 88F4B0AE25E5587E0008F02A /* FirebaseFunctions */; };
 		88F4B0B125E5587E0008F02A /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 88F4B0B025E5587E0008F02A /* FirebaseFirestoreSwift-Beta */; };
 		88F4B0B325E5587E0008F02A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 88F4B0B225E5587E0008F02A /* FirebaseAuth */; };
@@ -30,12 +28,10 @@
 		8855FD2625E65ED800E72230 /* FirestoreDemoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreDemoScreen.swift; sourceTree = "<group>"; };
 		8875A74D25DBB8F00013BEEB /* AsyncAwaitFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsyncAwaitFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8875A75025DBB8F00013BEEB /* AsyncAwaitFirebaseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitFirebaseApp.swift; sourceTree = "<group>"; };
-		8875A75225DBB8F00013BEEB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8875A75425DBB8F20013BEEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8875A75725DBB8F20013BEEB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8875A75925DBB8F20013BEEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8875A76425DBBA700013BEEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8875A76625DBBAB30013BEEB /* FirebaseAsyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAsyncViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,24 +57,15 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		8855FD1E25E6407C00E72230 /* Views */ = {
+		8855FD1E25E6407C00E72230 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				8855FD2025E640CB00E72230 /* MenuScreen.swift */,
-				8875A75225DBB8F00013BEEB /* ContentView.swift */,
 				8855FD2225E642C900E72230 /* SignInDemoScreen.swift */,
 				8855FD2425E64BA600E72230 /* FunctionsDemoScreen.swift */,
 				8855FD2625E65ED800E72230 /* FirestoreDemoScreen.swift */,
 			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		8855FD1F25E6409200E72230 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				8875A76625DBBAB30013BEEB /* FirebaseAsyncViewModel.swift */,
-			);
-			path = ViewModels;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		885B910C25DFC84400959368 /* Frameworks */ = {
@@ -109,8 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				8855FD1D25E6407200E72230 /* App */,
-				8855FD1E25E6407C00E72230 /* Views */,
-				8855FD1F25E6409200E72230 /* ViewModels */,
+				8855FD1E25E6407C00E72230 /* Screens */,
 				8875A75425DBB8F20013BEEB /* Assets.xcassets */,
 				8875A75925DBB8F20013BEEB /* Info.plist */,
 				8875A76425DBBA700013BEEB /* GoogleService-Info.plist */,
@@ -208,11 +194,9 @@
 			files = (
 				8855FD2325E642C900E72230 /* SignInDemoScreen.swift in Sources */,
 				8855FD2125E640CB00E72230 /* MenuScreen.swift in Sources */,
-				8875A75325DBB8F00013BEEB /* ContentView.swift in Sources */,
 				8875A75125DBB8F00013BEEB /* AsyncAwaitFirebaseApp.swift in Sources */,
 				8855FD2525E64BA600E72230 /* FunctionsDemoScreen.swift in Sources */,
 				8855FD2725E65ED800E72230 /* FirestoreDemoScreen.swift in Sources */,
-				8875A76725DBBAB30013BEEB /* FirebaseAsyncViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

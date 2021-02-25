@@ -12,22 +12,17 @@ struct MenuScreen: View {
   var body: some View {
     NavigationView {
       List {
-        Section(header: Text("Firebase Authentication")) {
+        Section(header: Text("Demos")) {
           NavigationLink(destination: SignInDemoScreen()) {
-            Label("Sign in", systemImage: "key")
+            Label("Firebase Authentication", systemImage: "key")
           }
-        }
-        Section(header: Text("Cloud Functions for Firebase")) {
           NavigationLink(destination: FunctionsDemoScreen()) {
-            Label("Call a function", systemImage: "key")
+            Label("Cloud Functions", systemImage: "gearshape.2")
           }
-        }
-        Section(header: Text("Cloud Firestore")) {
           NavigationLink(destination: FirestoreDemoScreen()) {
-            Label("Fetch a document", systemImage: "key")
+            Label("Cloud Firestore", systemImage: "externaldrive.badge.icloud")
           }
         }
-
       }
       .listStyle(InsetGroupedListStyle())
       .navigationTitle("Firebase & async/await")

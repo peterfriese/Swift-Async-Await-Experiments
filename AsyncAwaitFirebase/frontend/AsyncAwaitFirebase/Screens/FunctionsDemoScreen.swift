@@ -19,24 +19,46 @@ class FunctionsDemoScreenViewModel: ObservableObject {
     functions.useEmulator(withHost: "localhost", port: 5001)
   }
   
-  @asyncHandler func helloWorld() {
+  func helloWorld() {
     let helloWorldCallable = functions.httpsCallable("helloWorld")
-    let result = try? await helloWorldCallable.call()
     
-    if let data = result?.data as? String {
-      DispatchQueue.main.async {
+    helloWorldCallable.call { result, error in
+      if let error = error as NSError? {
+        if error.domain == FunctionsErrorDomain {
+          let code = FunctionsErrorCode(rawValue: error.code)
+          let message = error.localizedDescription
+          let details = error.userInfo[FunctionsErrorDetailsKey]
+          print("There was an error when trying to call the function. \n" +
+                  "Code: \(String(describing: code)) \n" +
+                  "Message: \(message) \n" +
+                  "Details: \(String(describing: details))")
+        }
+      }
+      
+      if let data = result?.data as? String {
         self.message = data
         self.showResultSheet = true
       }
     }
   }
   
-  @asyncHandler func helloUser() {
+  func helloUser() {
     let helloUserCallable = functions.httpsCallable("helloUser")
-    let result = try? await helloUserCallable.call(name)
     
-    if let data = result?.data as? String {
-      DispatchQueue.main.async {
+    helloUserCallable.call(name) { result, error in
+      if let error = error as NSError? {
+        if error.domain == FunctionsErrorDomain {
+          let code = FunctionsErrorCode(rawValue: error.code)
+          let message = error.localizedDescription
+          let details = error.userInfo[FunctionsErrorDetailsKey]
+          print("There was an error when trying to call the function. \n" +
+                  "Code: \(String(describing: code)) \n" +
+                  "Message: \(message) \n" +
+                  "Details: \(String(describing: details))")
+        }
+      }
+      
+      if let data = result?.data as? String {
         self.message = data
         self.showResultSheet = true
       }

@@ -29,26 +29,32 @@ class FirestoreDemoScreenViewModel: ObservableObject {
     firestore.useEmulator(withHost: "localhost", port: 8080)
   }
   
-  @asyncHandler func saveFavourites() {
+  func saveFavourites() {
     do {
-      try firestore.collection("favourites").document("sample").setData(from: favourites)
-    }
-    catch {
-      print(error)
-    }
-  }
-  
-  @asyncHandler func fetchFavourites() {
-    do {
-      let document = try await firestore.collection("favourites").document("sample").getDocument()
-      if let favourites = try document.data(as: Favourites.self) {
-        DispatchQueue.main.async {
-          self.favourites = favourites
+      try firestore.collection("favourites").document("sample").setData(from: favourites) { error in
+        if let error = error {
+          print("Error writing document: \(error)")
+        }
+        else {
+          print("Document saved successfully")
         }
       }
     }
     catch {
-      print(error)
+      print("Error writing document: \(error)")
+    }
+  }
+  
+  func fetchFavourites() {
+    firestore.collection("favourites").document("sample").getDocument { documentSnapshot, error in
+      do {
+        if let favourites = try documentSnapshot?.data(as: Favourites.self) {
+          self.favourites = favourites
+        }
+      }
+      catch {
+        print(error)
+      }
     }
   }
   

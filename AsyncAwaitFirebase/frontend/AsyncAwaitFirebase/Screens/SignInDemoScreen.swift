@@ -26,15 +26,13 @@ class SignInDemoScreenViewModel: ObservableObject {
       .store(in: &cancellables)
   }
   
-  @asyncHandler func signIn() {
-    do {
-      let result = try await Auth.auth().signIn(withEmail: email, password: password)
-      DispatchQueue.main.async {
-        self.user = result.user
+  func signIn() {
+    Auth.auth().signIn(withEmail: email, password: password) { result, error in
+      if let error = error {
+        print(error)
+        return
       }
-    }
-    catch {
-      print(error)
+      self.user = result?.user
     }
   }
   

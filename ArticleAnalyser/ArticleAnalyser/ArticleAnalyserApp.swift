@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 9999, *)
 @main
 struct ArticleAnalyserApp: App {
   var body: some Scene {

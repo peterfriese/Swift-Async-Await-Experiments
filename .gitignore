@@ -118,5 +118,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-/AsyncAwaitFirebase/backend/functions/node_modules
+node_modules
 *.log
+GoogleService-Info.plist

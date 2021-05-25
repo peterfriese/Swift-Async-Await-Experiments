@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(iOS 9999, *)
 class ArticlesViewModel: ObservableObject {
   @Published var articles = [Article]()
   @Published var links = ArticleLink.samples
@@ -15,9 +16,9 @@ class ArticlesViewModel: ObservableObject {
   private var analyserService = ArticleAnalyserService()
   private var asyncAnalyserService = AsyncArticleAnalyserService()
   
-  func addNewArticle(from url: String) {
+  func addNewArticle(from url: String) async {
 //    performAddNewArticle(from: url)
-    performAddNewArticleAsync(from: url)
+    await performAddNewArticleAsync(from: url)
   }
   
   func performAddNewArticle(from url: String) {
@@ -30,7 +31,7 @@ class ArticlesViewModel: ObservableObject {
     }
   }
   
-  @asyncHandler func performAddNewArticleAsync(from url: String) {
+  func performAddNewArticleAsync(from url: String) async {
     DispatchQueue.main.async {
       self.isFetching = true
     }

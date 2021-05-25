@@ -10,6 +10,7 @@ import SwiftSoup
 import NaturalLanguage
 import OpenGraph
 
+@available(iOS 9999, *)
 public class AsyncArticleAnalyserService: AsyncArticleAnalyser {
   func fetchArticle(from url: String) async throws -> String {
     guard let url =  URL(string: url) else {

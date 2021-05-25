@@ -47,7 +47,7 @@ The code in this repository makes use of the experimental Swift compiler toolcha
 
 To compile and run the code, make sure to follow these steps:
 
-1. Download the experimental Swift compiler toolchain from the [Snapshots/main](https://swift.org/download/#snapshots) section on the downloads page (I use the [Feb 02 2021 development snapshot](https://swift.org/builds/development/xcode/swift-DEVELOPMENT-SNAPSHOT-2021-02-02-a/swift-DEVELOPMENT-SNAPSHOT-2021-02-02-a-osx.pkg))
+1. Download the experimental Swift compiler toolchain from the [Snapshots/main](https://swift.org/download/#snapshots) section on the downloads page (I use the [May 18 2021 Swft 5.5 development snapshot](https://swift.org/builds/swift-5.5-branch/xcode/swift-5.5-DEVELOPMENT-SNAPSHOT-2021-05-18-a/swift-5.5-DEVELOPMENT-SNAPSHOT-2021-05-18-a-osx.pkg))
 2. Install the toolchain by double-clicking the package
 3. Activate the toolchain in Xcode (via _Settings > Components > Toolchains_)
 
@@ -60,6 +60,14 @@ Please note that (for a reason I don't yet understand), it's not possible to deb
 * Make sure _Info > Debug executable_ is unchecked
 
 Unfortunately, you can only select the toolchain on a global level, so keep in mind to select the built-in toolchain when you're done playing around with the code in this repository and want to go back working on your own app!
+
+## Breaking changes
+
+The Swift Development team has been making a couple of breaking changes (after all, this is still pre-release software):
+* `@asyncHandler` has been removed from the language (see [PR #37415](https://github.com/apple/swift/pull/37415)). According to [this discussion](https://forums.swift.org/t/new-concurrency-api-not-available-in-latest-toolchain/47389/2), we can wrap asynchronous code in a call to `detach { }` as an alternative. As of yet, it is unclear what if there will be a replacement for `@asyncHandler`.
+* Since Swift can now be shipped with the OS, all new features in the Swift standard library will need to have an availability annotation. To be able to mark new APIs as available for unreleased versions of future versions of the OS, a special case of `9999` has been introduced. This also means that all code using those new APIs will need to use availability flags as well. For details, see [this discussion on the Swift forums](https://forums.swift.org/t/availability-and-the-standard-library/20932).
+
+I updated the code to reflect those changes, and wouldn't be surprised to see further breaking changes before a final release is cut. If you run into any issues, feel free to open an issue on this repo (or even better - send a PR if you've got time time to build a solution).
 
 <!-- LICENSE -->
 ## License

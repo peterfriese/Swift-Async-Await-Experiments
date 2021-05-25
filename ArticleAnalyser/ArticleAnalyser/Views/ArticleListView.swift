@@ -8,6 +8,7 @@
 import SwiftUI
 import Kingfisher
 
+@available(iOS 9999, *)
 struct ArticleListView: View {
   @StateObject var viewModel = ArticlesViewModel()
   
@@ -62,6 +63,7 @@ struct ArticleListView: View {
   }
 }
 
+@available(iOS 9999, *)
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ArticleListView()

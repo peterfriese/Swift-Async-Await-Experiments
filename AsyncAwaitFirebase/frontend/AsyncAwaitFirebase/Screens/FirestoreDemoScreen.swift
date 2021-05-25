@@ -16,6 +16,7 @@ struct Favourites: Codable {
   var number: Int
 }
 
+@available(iOS 9999, *)
 class FirestoreDemoScreenViewModel: ObservableObject {
   @Published var favourites = Favourites(fruit: "", number: 0)
   
@@ -46,6 +47,23 @@ class FirestoreDemoScreenViewModel: ObservableObject {
   }
   
   func fetchFavourites() {
+    detach {
+      do {
+        let documentSnapshot = try await self.firestore.collection("favourites").document("sample").getDocument()
+        if let favourites = try documentSnapshot.data(as: Favourites.self) {
+          DispatchQueue.main.async {
+            self.favourites = favourites
+          }
+        }
+      }
+      catch {
+        print(error)
+      }
+    }
+  }
+  
+  
+  func fetchFavouritesOld() {
     firestore.collection("favourites").document("sample").getDocument { documentSnapshot, error in
       do {
         if let favourites = try documentSnapshot?.data(as: Favourites.self) {
@@ -65,6 +83,7 @@ class FirestoreDemoScreenViewModel: ObservableObject {
   
 }
 
+@available(iOS 9999, *)
 struct FirestoreDemoScreen: View {
   @StateObject var viewModel = FirestoreDemoScreenViewModel()
   
@@ -101,6 +120,7 @@ struct FirestoreDemoScreen: View {
   }
 }
 
+@available(iOS 9999, *)
 struct FirestoreDemoScreen_Previews: PreviewProvider {
   static var previews: some View {
     FirestoreDemoScreen()

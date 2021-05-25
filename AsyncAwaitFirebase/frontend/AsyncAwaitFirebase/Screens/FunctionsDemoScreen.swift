@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 
+@available(iOS 9999, *)
 class FunctionsDemoScreenViewModel: ObservableObject {
   @Published var message: String = ""
   @Published var name: String = "Peter"
@@ -44,6 +45,19 @@ class FunctionsDemoScreenViewModel: ObservableObject {
   
   func helloUser() {
     let helloUserCallable = functions.httpsCallable("helloUser")
+    detach {
+      let result = try? await helloUserCallable.call(self.name)
+      if let data = result?.data as? String {
+        DispatchQueue.main.async {
+          self.message = data
+          self.showResultSheet = true
+        }
+      }
+    }
+  }
+  
+  func helloUserOld() {
+    let helloUserCallable = functions.httpsCallable("helloUser")
     
     helloUserCallable.call(name) { result, error in
       if let error = error as NSError? {
@@ -65,22 +79,25 @@ class FunctionsDemoScreenViewModel: ObservableObject {
     }
   }
   
-  @asyncHandler func multipleCalls() {
-    let helloWorldCallable = functions.httpsCallable("helloWorld")
-    let helloUserCallable = functions.httpsCallable("helloUser")
-    
-    async let helloWorldResult = try? helloWorldCallable.call()
-    async let helloUserResult = try? helloUserCallable.call(name)
-    
-    if let helloWorldData = await helloWorldResult?.data as? String, let helloUserData = await helloUserResult?.data as? String {
-      DispatchQueue.main.async {
-        self.message = "\(helloWorldData) - \(helloUserData)"
-        self.showResultSheet = true
+  func multipleCalls() {
+    detach { [self] in
+      let helloWorldCallable = self.functions.httpsCallable("helloWorld")
+      let helloUserCallable = self.functions.httpsCallable("helloUser")
+      
+      async let helloWorldResult = try? helloWorldCallable.call()
+      async let helloUserResult = try? helloUserCallable.call(name)
+      
+      if let helloWorldData = await helloWorldResult?.data as? String, let helloUserData = await helloUserResult?.data as? String {
+        DispatchQueue.main.async {
+          self.message = "\(helloWorldData) - \(helloUserData)"
+          self.showResultSheet = true
+        }
       }
     }
   }
 }
 
+@available(iOS 9999, *)
 struct FunctionsDemoScreen: View {
   @StateObject var viewModel = FunctionsDemoScreenViewModel()
   
@@ -124,6 +141,7 @@ struct FunctionsDemoScreen: View {
   }
 }
 
+@available(iOS 9999, *)
 struct FunctionsDemoScreen_Previews: PreviewProvider {
   static var previews: some View {
     FunctionsDemoScreen()

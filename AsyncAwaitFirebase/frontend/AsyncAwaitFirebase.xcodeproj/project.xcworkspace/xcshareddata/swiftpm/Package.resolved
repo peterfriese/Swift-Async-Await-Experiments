@@ -23,8 +23,8 @@
         "package": "Firebase",
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk",
         "state": {
-          "branch": "pb-boringssl-stdlib-fix",
-          "revision": "95540ed67c8c214068b92f7b7f42bb2d71bf82ed",
+          "branch": "master",
+          "revision": "f5fbdac038ac6fa284074ea2a101f22a573bbb87",
           "version": null
         }
       },

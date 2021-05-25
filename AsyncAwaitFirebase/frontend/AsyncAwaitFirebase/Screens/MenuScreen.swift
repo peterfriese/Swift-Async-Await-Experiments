@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 9999, *)
 struct MenuScreen: View {
   
   var body: some View {
@@ -30,6 +31,7 @@ struct MenuScreen: View {
   }
 }
 
+@available(iOS 9999, *)
 struct MenuScreen_Previews: PreviewProvider {
   static var previews: some View {
     MenuScreen()

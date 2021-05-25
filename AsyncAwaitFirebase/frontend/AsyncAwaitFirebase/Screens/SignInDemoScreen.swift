@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import Combine
 
+@available(iOS 9999, *)
 class SignInDemoScreenViewModel: ObservableObject {
   @Published var email: String = "test@test.com"
   @Published var password: String = "test1234"
@@ -27,6 +28,20 @@ class SignInDemoScreenViewModel: ObservableObject {
   }
   
   func signIn() {
+    detach {
+      do {
+        let result = try await Auth.auth().signIn(withEmail: self.email, password: self.password)
+        DispatchQueue.main.async {
+          self.user = result.user
+        }
+      }
+      catch {
+        print(error)
+      }
+    }
+  }
+  
+  func signInOld() {
     Auth.auth().signIn(withEmail: email, password: password) { result, error in
       if let error = error {
         print(error)
@@ -47,6 +62,7 @@ class SignInDemoScreenViewModel: ObservableObject {
   }
 }
 
+@available(iOS 9999, *)
 struct SignInDemoScreen: View {
   @StateObject var viewModel = SignInDemoScreenViewModel()
   
@@ -103,6 +119,7 @@ struct SignInDemoScreen: View {
   }
 }
 
+@available(iOS 9999, *)
 struct SignInDemoScreen_Previews: PreviewProvider {
   static var previews: some View {
     SignInDemoScreen()

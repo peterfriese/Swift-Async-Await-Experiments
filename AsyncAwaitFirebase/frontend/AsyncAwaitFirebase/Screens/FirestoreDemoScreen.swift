@@ -47,7 +47,7 @@ class FirestoreDemoScreenViewModel: ObservableObject {
   }
   
   func fetchFavourites() {
-    detach {
+    Task.detached {
       do {
         let documentSnapshot = try await self.firestore.collection("favourites").document("sample").getDocument()
         if let favourites = try documentSnapshot.data(as: Favourites.self) {

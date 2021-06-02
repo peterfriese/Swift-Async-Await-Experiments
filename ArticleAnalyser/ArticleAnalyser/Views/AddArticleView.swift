@@ -15,7 +15,7 @@ struct AddArticleView: View {
   @State var newUrl: String = ""
   
   func addUrl(url: String) {
-    detach {
+    Task.detached {
       await viewModel.addNewArticle(from: url)
     }
     presentationMode.wrappedValue.dismiss()

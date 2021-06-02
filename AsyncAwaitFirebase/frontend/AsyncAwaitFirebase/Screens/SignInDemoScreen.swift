@@ -28,7 +28,7 @@ class SignInDemoScreenViewModel: ObservableObject {
   }
   
   func signIn() {
-    detach {
+    Task.detached {
       do {
         let result = try await Auth.auth().signIn(withEmail: self.email, password: self.password)
         DispatchQueue.main.async {

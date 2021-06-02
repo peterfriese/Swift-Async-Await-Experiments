@@ -45,7 +45,7 @@ class FunctionsDemoScreenViewModel: ObservableObject {
   
   func helloUser() {
     let helloUserCallable = functions.httpsCallable("helloUser")
-    detach {
+    Task.detached {
       let result = try? await helloUserCallable.call(self.name)
       if let data = result?.data as? String {
         DispatchQueue.main.async {
@@ -80,7 +80,7 @@ class FunctionsDemoScreenViewModel: ObservableObject {
   }
   
   func multipleCalls() {
-    detach { [self] in
+    Task.detached { [self] in
       let helloWorldCallable = self.functions.httpsCallable("helloWorld")
       let helloUserCallable = self.functions.httpsCallable("helloUser")
       

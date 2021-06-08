@@ -37,13 +37,13 @@ Experiments with Swift's new async/await feature ([SE 0296](https://github.com/a
 [Here's an article](https://peterfriese.dev/async-await-in-swiftui/) that shows you how to use this feature.
 
 ## Requirements
-The code in this repository makes use of the experimental Swift compiler toolchain.
+Previous versions of the code in this repository made use of the experimental Swift compiler toolchain. Since WWDC 2021, support for async/await is now available in the default compiler toolchain.
 
-* Xcode 12.3 or later
-* Swift Compiler Toolchain (Jan 04, 2021 or later)
+* Xcode 13 or later
+* ~~Swift Compiler Toolchain (Jan 04, 2021 or later)~~
 
 <!-- GETTING STARTED -->
-## Getting Started
+<!-- ## Getting Started
 
 To compile and run the code, make sure to follow these steps:
 
@@ -59,15 +59,21 @@ Please note that (for a reason I don't yet understand), it's not possible to deb
 * Navigate into the _Run_ section
 * Make sure _Info > Debug executable_ is unchecked
 
-Unfortunately, you can only select the toolchain on a global level, so keep in mind to select the built-in toolchain when you're done playing around with the code in this repository and want to go back working on your own app!
+Unfortunately, you can only select the toolchain on a global level, so keep in mind to select the built-in toolchain when you're done playing around with the code in this repository and want to go back working on your own app! -->
 
 ## Breaking changes
+
+As this is still in development, there will be changes. I updated the code to reflect those changes, and wouldn't be surprised to see further breaking changes before a final release is cut. If you run into any issues, feel free to open an issue on this repo (or even better - send a PR if you've got time time to build a solution).
+
+### 2021-08-06 (WWDC 21)
+* Xcode 13 now contains Swift 5.5, we no longer need to download the experimental compiler toolchain
+* [According to the Swift team](https://twitter.com/AirspeedSwift/status/1401992834194952200), the correct way to launch an async task from with in SwiftUI is `async { }` (in beta 1) or `Task { }` (after beta 1).
+
+### 2021-05-25
 
 The Swift Development team has been making a couple of breaking changes (after all, this is still pre-release software):
 * `@asyncHandler` has been removed from the language (see [PR #37415](https://github.com/apple/swift/pull/37415)). According to [this discussion](https://forums.swift.org/t/new-concurrency-api-not-available-in-latest-toolchain/47389/2), we can wrap asynchronous code in a call to `detach { }` as an alternative. As of yet, it is unclear what if there will be a replacement for `@asyncHandler`.
 * Since Swift can now be shipped with the OS, all new features in the Swift standard library will need to have an availability annotation. To be able to mark new APIs as available for unreleased versions of future versions of the OS, a special case of `9999` has been introduced. This also means that all code using those new APIs will need to use availability flags as well. For details, see [this discussion on the Swift forums](https://forums.swift.org/t/availability-and-the-standard-library/20932).
-
-I updated the code to reflect those changes, and wouldn't be surprised to see further breaking changes before a final release is cut. If you run into any issues, feel free to open an issue on this repo (or even better - send a PR if you've got time time to build a solution).
 
 <!-- LICENSE -->
 ## License

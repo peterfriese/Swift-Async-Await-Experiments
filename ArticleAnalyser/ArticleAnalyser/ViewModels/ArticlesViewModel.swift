@@ -7,7 +7,7 @@
 
 import Foundation
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 class ArticlesViewModel: ObservableObject {
   @Published var articles = [Article]()
   @Published var links = ArticleLink.samples
@@ -17,37 +17,31 @@ class ArticlesViewModel: ObservableObject {
   private var asyncAnalyserService = AsyncArticleAnalyserService()
   
   func addNewArticle(from url: String) async {
-//    performAddNewArticle(from: url)
+    //    performAddNewArticle(from: url)
     await performAddNewArticleAsync(from: url)
   }
   
+  @MainActor
   func performAddNewArticle(from url: String) {
     self.isFetching = true
     analyserService.process(url: url) { article in
-      DispatchQueue.main.async {
-        self.articles.append(article)
-        self.isFetching = false
-      }
+      self.articles.append(article)
+      self.isFetching = false
     }
   }
   
+  @MainActor
   func performAddNewArticleAsync(from url: String) async {
-    DispatchQueue.main.async {
-      self.isFetching = true
-    }
-
+    self.isFetching = true
+    
     do {
       let article = try await asyncAnalyserService.process(url: url)
-      DispatchQueue.main.async {
-        self.articles.append(article)
-      }
+      self.articles.append(article)
     }
     catch {
       print(error.localizedDescription)
     }
     
-    DispatchQueue.main.async {
-      self.isFetching = false
-    }
+    self.isFetching = false
   }
 }

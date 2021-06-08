@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 struct AddArticleView: View {
   @Environment(\.presentationMode) var presentationMode
   @ObservedObject var viewModel: ArticlesViewModel
@@ -15,7 +15,7 @@ struct AddArticleView: View {
   @State var newUrl: String = ""
   
   func addUrl(url: String) {
-    detach {
+    async {
       await viewModel.addNewArticle(from: url)
     }
     presentationMode.wrappedValue.dismiss()
@@ -43,7 +43,7 @@ struct AddArticleView: View {
   }
 }
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 struct AddArticleView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {

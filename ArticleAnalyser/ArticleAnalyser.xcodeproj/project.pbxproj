@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		881441A725CAF41300E84E7B /* OpenGraph in Frameworks */ = {isa = PBXBuildFile; productRef = 881441A625CAF41300E84E7B /* OpenGraph */; };
-		881441AB25CAF77300E84E7B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 881441AA25CAF77300E84E7B /* Kingfisher */; };
 		8857E17525C948F200202BA6 /* ArticleAnalyserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857E17425C948F200202BA6 /* ArticleAnalyserApp.swift */; };
 		8857E17725C948F200202BA6 /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857E17625C948F200202BA6 /* ArticleListView.swift */; };
 		8857E17925C948F400202BA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8857E17825C948F400202BA6 /* Assets.xcassets */; };
@@ -48,7 +47,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				881441AB25CAF77300E84E7B /* Kingfisher in Frameworks */,
 				88A8285D25C95E3E003F06CE /* SwiftSoup in Frameworks */,
 				881441A725CAF41300E84E7B /* OpenGraph in Frameworks */,
 			);
@@ -169,7 +167,6 @@
 			packageProductDependencies = (
 				88A8285C25C95E3E003F06CE /* SwiftSoup */,
 				881441A625CAF41300E84E7B /* OpenGraph */,
-				881441AA25CAF77300E84E7B /* Kingfisher */,
 			);
 			productName = ArticleAnalyser;
 			productReference = 8857E17125C948F200202BA6 /* ArticleAnalyser.app */;
@@ -201,7 +198,6 @@
 			packageReferences = (
 				88A8285B25C95E3E003F06CE /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				881441A525CAF41300E84E7B /* XCRemoteSwiftPackageReference "OpenGraph" */,
-				881441A925CAF77300E84E7B /* XCRemoteSwiftPackageReference "KingFisher" */,
 			);
 			productRefGroup = 8857E17225C948F200202BA6 /* Products */;
 			projectDirPath = "";
@@ -297,7 +293,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -352,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -440,14 +436,6 @@
 				minimumVersion = 1.2.3;
 			};
 		};
-		881441A925CAF77300E84E7B /* XCRemoteSwiftPackageReference "KingFisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/KingFisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.1.0;
-			};
-		};
 		88A8285B25C95E3E003F06CE /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
@@ -463,11 +451,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 881441A525CAF41300E84E7B /* XCRemoteSwiftPackageReference "OpenGraph" */;
 			productName = OpenGraph;
-		};
-		881441AA25CAF77300E84E7B /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 881441A925CAF77300E84E7B /* XCRemoteSwiftPackageReference "KingFisher" */;
-			productName = Kingfisher;
 		};
 		88A8285C25C95E3E003F06CE /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;

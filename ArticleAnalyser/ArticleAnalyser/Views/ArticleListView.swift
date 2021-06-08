@@ -6,9 +6,8 @@
 //
 
 import SwiftUI
-import Kingfisher
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 struct ArticleListView: View {
   @StateObject var viewModel = ArticlesViewModel()
   
@@ -32,20 +31,22 @@ struct ArticleListView: View {
             HStack {
               Text(article.title)
               Spacer()
-              KFImage(article.imageUrl)
-                .cancelOnDisappear(true)
-                .placeholder {
-                  Image(systemName: "scribble.variable")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding()
-                    .frame(width: 75, height: 75, alignment: .center)
-                    .background(Color("AccentColor"))
-                }
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 75, height: 75, alignment: .center)
-                .cornerRadius(8.0)
+              AsyncImage(url: article.imageUrl) { image in
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(width: 75, height: 75, alignment: .center)
+                  .cornerRadius(8.0)
+              } placeholder: {
+                Image(systemName: "scribble.variable")
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+                  .padding()
+                  .background(Color("AccentColor"))
+                  .frame(width: 75, height: 75, alignment: .center)
+                  .cornerRadius(8.0)
+
+              }
             }
           }
         }
@@ -63,7 +64,7 @@ struct ArticleListView: View {
   }
 }
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ArticleListView()

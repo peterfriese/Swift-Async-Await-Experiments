@@ -8,7 +8,7 @@
 import SwiftUI
 import Firebase
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 @main
 struct AsyncAwaitFirebaseApp: App {
   init() {

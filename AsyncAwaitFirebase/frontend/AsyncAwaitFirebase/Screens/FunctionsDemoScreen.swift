@@ -8,7 +8,8 @@
 import SwiftUI
 import Firebase
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
+@MainActor
 class FunctionsDemoScreenViewModel: ObservableObject {
   @Published var message: String = ""
   @Published var name: String = "Peter"
@@ -22,6 +23,32 @@ class FunctionsDemoScreenViewModel: ObservableObject {
   
   func helloWorld() {
     let helloWorldCallable = functions.httpsCallable("helloWorld")
+    async {
+      do {
+        let result = try await helloWorldCallable.call()
+        if let data = result.data as? String {
+          self.message = data
+          self.showResultSheet = true
+        }
+      }
+      catch {
+        if let error = error as NSError? {
+          if error.domain == FunctionsErrorDomain {
+            let code = FunctionsErrorCode(rawValue: error.code)
+            let message = error.localizedDescription
+            let details = error.userInfo[FunctionsErrorDetailsKey]
+            print("There was an error when trying to call the function. \n" +
+                  "Code: \(String(describing: code)) \n" +
+                  "Message: \(message) \n" +
+                  "Details: \(String(describing: details))")
+          }
+        }
+      }
+    }
+  }
+  
+  func helloWorldOld() {
+    let helloWorldCallable = functions.httpsCallable("helloWorld")
     
     helloWorldCallable.call { result, error in
       if let error = error as NSError? {
@@ -30,9 +57,9 @@ class FunctionsDemoScreenViewModel: ObservableObject {
           let message = error.localizedDescription
           let details = error.userInfo[FunctionsErrorDetailsKey]
           print("There was an error when trying to call the function. \n" +
-                  "Code: \(String(describing: code)) \n" +
-                  "Message: \(message) \n" +
-                  "Details: \(String(describing: details))")
+                "Code: \(String(describing: code)) \n" +
+                "Message: \(message) \n" +
+                "Details: \(String(describing: details))")
         }
       }
       
@@ -43,15 +70,14 @@ class FunctionsDemoScreenViewModel: ObservableObject {
     }
   }
   
+  
   func helloUser() {
     let helloUserCallable = functions.httpsCallable("helloUser")
-    detach {
+    async {
       let result = try? await helloUserCallable.call(self.name)
       if let data = result?.data as? String {
-        DispatchQueue.main.async {
-          self.message = data
-          self.showResultSheet = true
-        }
+        self.message = data
+        self.showResultSheet = true
       }
     }
   }
@@ -66,9 +92,9 @@ class FunctionsDemoScreenViewModel: ObservableObject {
           let message = error.localizedDescription
           let details = error.userInfo[FunctionsErrorDetailsKey]
           print("There was an error when trying to call the function. \n" +
-                  "Code: \(String(describing: code)) \n" +
-                  "Message: \(message) \n" +
-                  "Details: \(String(describing: details))")
+                "Code: \(String(describing: code)) \n" +
+                "Message: \(message) \n" +
+                "Details: \(String(describing: details))")
         }
       }
       
@@ -80,7 +106,7 @@ class FunctionsDemoScreenViewModel: ObservableObject {
   }
   
   func multipleCalls() {
-    detach { [self] in
+    async { [self] in
       let helloWorldCallable = self.functions.httpsCallable("helloWorld")
       let helloUserCallable = self.functions.httpsCallable("helloUser")
       
@@ -88,24 +114,22 @@ class FunctionsDemoScreenViewModel: ObservableObject {
       async let helloUserResult = try? helloUserCallable.call(name)
       
       if let helloWorldData = await helloWorldResult?.data as? String, let helloUserData = await helloUserResult?.data as? String {
-        DispatchQueue.main.async {
-          self.message = "\(helloWorldData) - \(helloUserData)"
-          self.showResultSheet = true
-        }
+        self.message = "\(helloWorldData) - \(helloUserData)"
+        self.showResultSheet = true
       }
     }
   }
 }
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 struct FunctionsDemoScreen: View {
   @StateObject var viewModel = FunctionsDemoScreenViewModel()
   
   var body: some View {
     Form {
       Section(header: Text("Hello World")) {
-        Button(action: viewModel.helloWorld) {
-          Text("Call helloWorld()")
+        Button("Call helloWorld()") {
+          viewModel.helloWorld()
         }
       }
       
@@ -116,8 +140,8 @@ struct FunctionsDemoScreen: View {
             .foregroundColor(.accentColor)
           TextField("Enter your name", text: $viewModel.name)
         }
-        Button(action: viewModel.helloUser) {
-          Text("Call helloUser()")
+        Button("Call helloUser()") {
+          viewModel.helloUser()
         }
       }
       
@@ -128,11 +152,11 @@ struct FunctionsDemoScreen: View {
             .foregroundColor(.accentColor)
           TextField("Enter your name", text: $viewModel.name)
         }
-        Button(action: viewModel.multipleCalls) {
-          Text("Call helloWorld and helloUser()")
+        Button("Call helloWorld() and helloUser()") {
+          viewModel.multipleCalls()
         }
       }
-
+      
     }
     .navigationTitle("Cloud Functions")
     .sheet(isPresented: $viewModel.showResultSheet) {

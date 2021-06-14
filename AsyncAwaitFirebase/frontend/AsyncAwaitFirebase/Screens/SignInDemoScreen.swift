@@ -9,13 +9,14 @@ import SwiftUI
 import Firebase
 import Combine
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
+@MainActor
 class SignInDemoScreenViewModel: ObservableObject {
   @Published var email: String = "test@test.com"
   @Published var password: String = "test1234"
   
-  @Published var user: User?
-  @Published var isSignedIn = false
+  @Published private(set) var user: User?
+  @Published private(set) var isSignedIn = false
   
   private var cancellables = Set<AnyCancellable>()
   
@@ -28,12 +29,10 @@ class SignInDemoScreenViewModel: ObservableObject {
   }
   
   func signIn() {
-    detach {
+    async {
       do {
-        let result = try await Auth.auth().signIn(withEmail: self.email, password: self.password)
-        DispatchQueue.main.async {
-          self.user = result.user
-        }
+        let result = try await Auth.auth().signIn(withEmail: email, password: password)
+        self.user = result.user
       }
       catch {
         print(error)
@@ -62,7 +61,7 @@ class SignInDemoScreenViewModel: ObservableObject {
   }
 }
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 struct SignInDemoScreen: View {
   @StateObject var viewModel = SignInDemoScreenViewModel()
   
@@ -84,8 +83,8 @@ struct SignInDemoScreen: View {
             .foregroundColor(.accentColor)
           SecureField("Enter your password:", text: $viewModel.password)
         }
-        Button(action: viewModel.signIn) {
-          Text("Sign in")
+        Button("Sign in") {
+          viewModel.signIn()
         }
         .disabled(viewModel.password.isEmpty || viewModel.isSignedIn)
       }
@@ -110,8 +109,8 @@ struct SignInDemoScreen: View {
             Text("\(viewModel.user?.email ?? "")")
           }
         }
-        Button(action: viewModel.signOut) {
-          Text("Sign out")
+        Button("Sign out") {
+          viewModel.signOut()
         }
       }
     }

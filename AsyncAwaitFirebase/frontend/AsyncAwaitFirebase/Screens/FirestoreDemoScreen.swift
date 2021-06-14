@@ -16,7 +16,8 @@ struct Favourites: Codable {
   var number: Int
 }
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
+@MainActor
 class FirestoreDemoScreenViewModel: ObservableObject {
   @Published var favourites = Favourites(fruit: "", number: 0)
   
@@ -25,6 +26,7 @@ class FirestoreDemoScreenViewModel: ObservableObject {
   init() {
     let settings = firestore.settings
     settings.isPersistenceEnabled = false
+    settings.host = "localhost"
     settings.isSSLEnabled = false
     firestore.settings = settings
     firestore.useEmulator(withHost: "localhost", port: 8080)
@@ -47,7 +49,7 @@ class FirestoreDemoScreenViewModel: ObservableObject {
   }
   
   func fetchFavourites() {
-    detach {
+    async {
       do {
         let documentSnapshot = try await self.firestore.collection("favourites").document("sample").getDocument()
         if let favourites = try documentSnapshot.data(as: Favourites.self) {
@@ -83,7 +85,7 @@ class FirestoreDemoScreenViewModel: ObservableObject {
   
 }
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 struct FirestoreDemoScreen: View {
   @StateObject var viewModel = FirestoreDemoScreenViewModel()
   
@@ -104,14 +106,14 @@ struct FirestoreDemoScreen: View {
         }
       }
       Section{
-        Button(action: viewModel.clearForm) {
-          Text("Clear form")
+        Button("Clear form") {
+          viewModel.clearForm()
         }
-        Button(action: viewModel.fetchFavourites) {
-          Text("Fetch favourites")
+        Button("Fetch favourites") {
+          viewModel.fetchFavourites()
         }
-        Button(action: viewModel.saveFavourites) {
-          Text("Save favourites")
+        Button("Save favourites") {
+          viewModel.saveFavourites()
         }
       }
       
@@ -120,7 +122,7 @@ struct FirestoreDemoScreen: View {
   }
 }
 
-@available(iOS 9999, *)
+@available(iOS 15.0, *)
 struct FirestoreDemoScreen_Previews: PreviewProvider {
   static var previews: some View {
     FirestoreDemoScreen()

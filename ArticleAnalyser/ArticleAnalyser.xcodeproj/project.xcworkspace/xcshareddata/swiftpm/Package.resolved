@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Kingfisher",
-        "repositoryURL": "https://github.com/onevcat/KingFisher",
-        "state": {
-          "branch": null,
-          "revision": "f2c757ced8ed65b74447298af95f1cf698b5ac49",
-          "version": "6.1.0"
-        }
-      },
-      {
         "package": "OpenGraph",
         "repositoryURL": "https://github.com/satoshi-takano/OpenGraph",
         "state": {

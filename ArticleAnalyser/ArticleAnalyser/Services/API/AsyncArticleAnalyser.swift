@@ -13,13 +13,13 @@ protocol AsyncArticleAnalyser {
   func fetchArticle(from url: String) async throws -> String
   
   // extract just the body of the web page
-  func extractText(from html: String) async throws -> String
+  func extractText(from html: String) throws -> String
   
   // extract the title
-  func extractTitle(from html: String) async throws -> String
+  func extractTitle(from html: String) throws -> String
   
   // analyse the text and return the tags we inferred
-  func inferTags(from text: String) async -> [Tag]
+  func inferTags(from text: String) -> [Tag]
   
   // try to extract image meta tag
   func extractImage(from url: String) async throws -> String
@@ -28,10 +28,10 @@ protocol AsyncArticleAnalyser {
 extension AsyncArticleAnalyser {
   func process(url: String) async throws -> Article {
     let htmlText = try await fetchArticle(from: url)
-    let text = try await extractText(from: htmlText)
-    let title = try await extractTitle(from: htmlText)
+    let text = try extractText(from: htmlText)
+    let title = try extractTitle(from: htmlText)
     let imageUrl = try await extractImage(from: url)
-    let tags = await inferTags(from: text)
+    let tags = inferTags(from: text)
     
     return Article(url: url,
                    title: title,

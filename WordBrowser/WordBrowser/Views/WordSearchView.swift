@@ -11,29 +11,29 @@ import SwiftUI
 class WordsAPIViewModel: ObservableObject {
   @Published var searchTerm: String = ""
   @Published var isSearching = false
-  
   @Published var result = Word.sample
   
   func executeQuery() async {
     async {
-      let currentSearchTerm = searchTerm
-      let date = Date().formatted(.iso8601)
-      print("Search: \(currentSearchTerm).")
       isSearching.toggle()
-      result = await search(for: currentSearchTerm)
+      result = await search(for: searchTerm)
       isSearching.toggle()
-      print("Search: \(currentSearchTerm) - returned \(result.word) Was sent at \(date)")
     }
   }
   
-  private func search(for term: String) async -> Word {
-    // build the request
+  private func buildURLRequest(for term: String) -> URLRequest {
     let escapedSearchTerm = term.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
     let url = URL(string: "https://wordsapiv1.p.rapidapi.com/words/\(escapedSearchTerm)/definitions")!
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     request.setValue(wordsAPIKey, forHTTPHeaderField: apiKeyHeader)
     request.setValue(wordsAPIHost, forHTTPHeaderField: apiHostHeader)
+    return request
+  }
+  
+  private func search(for term: String) async -> Word {
+    // build the request
+    let request = buildURLRequest(for: term)
     
     do {
       let (data, _) = try await URLSession.shared.data(for: request)
@@ -50,6 +50,7 @@ struct WordSearchView: View {
   var body: some View {
     List {
       Text(viewModel.result.word)
+        .bold()
       Section("Definitions") {
         ForEach(viewModel.result.definitions) { definition in
           DefinitionView(definition: definition)
@@ -67,18 +68,11 @@ struct WordSearchView: View {
         await viewModel.executeQuery()
       }
     }
-    .navigationTitle("Definitions")
-  }
-}
-
-struct DefinitionView: View {
-  var definition: Definition
-  var body: some View {
-    VStack(alignment: .leading) {
-      Text("(\(definition.partOfSpeech))")
-        .font(.caption)
-      Text(definition.definition)
+    .task {
+      viewModel.searchTerm = "Swift"
+      await viewModel.executeQuery()
     }
+    .navigationTitle("Definitions")
   }
 }
 

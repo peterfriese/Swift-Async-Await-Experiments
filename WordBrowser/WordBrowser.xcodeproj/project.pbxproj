@@ -13,6 +13,7 @@
 		88CEFF66267A108300365C8D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88CEFF65267A108300365C8D /* Preview Assets.xcassets */; };
 		88CEFF6D267A181E00365C8D /* WordsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEFF6C267A181E00365C8D /* WordsAPI.swift */; };
 		88CEFF6F267A185600365C8D /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEFF6E267A185600365C8D /* Secrets.swift */; };
+		88CEFF73267A45DA00365C8D /* DefinitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEFF72267A45DA00365C8D /* DefinitionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		88CEFF65267A108300365C8D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		88CEFF6C267A181E00365C8D /* WordsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsAPI.swift; sourceTree = "<group>"; };
 		88CEFF6E267A185600365C8D /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		88CEFF72267A45DA00365C8D /* DefinitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				88CEFF60267A108200365C8D /* WordSearchView.swift */,
+				88CEFF72267A45DA00365C8D /* DefinitionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88CEFF6D267A181E00365C8D /* WordsAPI.swift in Sources */,
+				88CEFF73267A45DA00365C8D /* DefinitionView.swift in Sources */,
 				88CEFF6F267A185600365C8D /* Secrets.swift in Sources */,
 				88CEFF61267A108200365C8D /* WordSearchView.swift in Sources */,
 				88CEFF5F267A108200365C8D /* WordBrowserApp.swift in Sources */,

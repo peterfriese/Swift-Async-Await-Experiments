@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		886A58862680A06C00A800F9 /* AddWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A58852680A06C00A800F9 /* AddWordView.swift */; };
+		889CB2E1267CA73700847320 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CB2E0267CA73700847320 /* LibraryView.swift */; };
+		889CB2E3267CA85C00847320 /* WordDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889CB2E2267CA85C00847320 /* WordDetailsView.swift */; };
 		88CEFF5F267A108200365C8D /* WordBrowserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEFF5E267A108200365C8D /* WordBrowserApp.swift */; };
 		88CEFF61267A108200365C8D /* WordSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEFF60267A108200365C8D /* WordSearchView.swift */; };
 		88CEFF63267A108300365C8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88CEFF62267A108300365C8D /* Assets.xcassets */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		886A58852680A06C00A800F9 /* AddWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordView.swift; sourceTree = "<group>"; };
+		889CB2E0267CA73700847320 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		889CB2E2267CA85C00847320 /* WordDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailsView.swift; sourceTree = "<group>"; };
 		88CEFF5B267A108200365C8D /* WordBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88CEFF5E267A108200365C8D /* WordBrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordBrowserApp.swift; sourceTree = "<group>"; };
 		88CEFF60267A108200365C8D /* WordSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchView.swift; sourceTree = "<group>"; };
@@ -88,6 +94,9 @@
 			children = (
 				88CEFF60267A108200365C8D /* WordSearchView.swift */,
 				88CEFF72267A45DA00365C8D /* DefinitionView.swift */,
+				889CB2E0267CA73700847320 /* LibraryView.swift */,
+				889CB2E2267CA85C00847320 /* WordDetailsView.swift */,
+				886A58852680A06C00A800F9 /* AddWordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,7 +175,10 @@
 				88CEFF73267A45DA00365C8D /* DefinitionView.swift in Sources */,
 				88CEFF6F267A185600365C8D /* Secrets.swift in Sources */,
 				88CEFF61267A108200365C8D /* WordSearchView.swift in Sources */,
+				886A58862680A06C00A800F9 /* AddWordView.swift in Sources */,
+				889CB2E1267CA73700847320 /* LibraryView.swift in Sources */,
 				88CEFF5F267A108200365C8D /* WordBrowserApp.swift in Sources */,
+				889CB2E3267CA85C00847320 /* WordDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

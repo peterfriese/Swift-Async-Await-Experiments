@@ -12,7 +12,7 @@ struct WordBrowserApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        WordSearchView()
+        LibraryView()
       }
     }
   }

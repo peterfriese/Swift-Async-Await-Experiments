@@ -8,7 +8,7 @@ import Foundation
 // MARK: - Word
 struct Word {
   let word: String
-  let definitions: [Definition]
+  let definitions: [Definition]?
 }
 
 extension Word {

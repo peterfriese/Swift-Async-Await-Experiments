@@ -11,6 +11,7 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class LibraryViewModel: ObservableObject {
   @Published var searchText = ""
   @Published var randomWord = "partially"
@@ -38,8 +39,40 @@ class LibraryViewModel: ObservableObject {
       .assign(to: &$filteredFavourites)
   }
   
+  private func buildURLRequest() -> URLRequest {
+    let url = URL(string: "https://wordsapiv1.p.rapidapi.com/words/?random=true")!
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    request.setValue(wordsAPIKey, forHTTPHeaderField: apiKeyHeader)
+    request.setValue(wordsAPIHost, forHTTPHeaderField: apiHostHeader)
+    return request
+  }
+  
+  private func fetchRandomWord() async -> Word {
+    // build the request
+    let request = buildURLRequest()
+    
+    do {
+      let (data, response) = try await URLSession.shared.data(for: request)
+      guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+        throw WordsAPI.invalidServerResponse
+      }
+      let word = try JSONDecoder().decode(Word.self, from: data)
+      return word
+    }
+    catch {
+      return Word.empty
+    }
+  }
+
+  
   func addFavourite(_ word: String) {
     favourites.append(word)
+  }
+  
+  func refresh() async {
+    let result = await fetchRandomWord()
+    randomWord = result.word
   }
 }
 
@@ -54,6 +87,9 @@ struct LibraryView: View {
       SectionView("My favourites", words: viewModel.filteredFavourites)
     }
     .searchable(text: $viewModel.searchText)
+    .refreshable {
+      await viewModel.refresh()
+    }
     .listStyle(.insetGrouped)
     .navigationTitle("Library")
     .toolbar {
@@ -69,6 +105,9 @@ struct LibraryView: View {
           viewModel.addFavourite(newWord)
         }
       }
+    }
+    .task {
+      await viewModel.refresh()
     }
   }
 }

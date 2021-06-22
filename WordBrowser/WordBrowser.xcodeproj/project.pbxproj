@@ -17,6 +17,7 @@
 		88CEFF6D267A181E00365C8D /* WordsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEFF6C267A181E00365C8D /* WordsAPI.swift */; };
 		88CEFF6F267A185600365C8D /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEFF6E267A185600365C8D /* Secrets.swift */; };
 		88CEFF73267A45DA00365C8D /* DefinitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CEFF72267A45DA00365C8D /* DefinitionView.swift */; };
+		88F360492681EF7A0056630F /* WordDetailsViewNoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F360482681EF7A0056630F /* WordDetailsViewNoViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		88CEFF6C267A181E00365C8D /* WordsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsAPI.swift; sourceTree = "<group>"; };
 		88CEFF6E267A185600365C8D /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		88CEFF72267A45DA00365C8D /* DefinitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionView.swift; sourceTree = "<group>"; };
+		88F360482681EF7A0056630F /* WordDetailsViewNoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailsViewNoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,10 +95,11 @@
 			isa = PBXGroup;
 			children = (
 				88CEFF60267A108200365C8D /* WordSearchView.swift */,
-				88CEFF72267A45DA00365C8D /* DefinitionView.swift */,
 				889CB2E0267CA73700847320 /* LibraryView.swift */,
-				889CB2E2267CA85C00847320 /* WordDetailsView.swift */,
 				886A58852680A06C00A800F9 /* AddWordView.swift */,
+				889CB2E2267CA85C00847320 /* WordDetailsView.swift */,
+				88CEFF72267A45DA00365C8D /* DefinitionView.swift */,
+				88F360482681EF7A0056630F /* WordDetailsViewNoViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			files = (
 				88CEFF6D267A181E00365C8D /* WordsAPI.swift in Sources */,
 				88CEFF73267A45DA00365C8D /* DefinitionView.swift in Sources */,
+				88F360492681EF7A0056630F /* WordDetailsViewNoViewModel.swift in Sources */,
 				88CEFF6F267A185600365C8D /* Secrets.swift in Sources */,
 				88CEFF61267A108200365C8D /* WordSearchView.swift in Sources */,
 				886A58862680A06C00A800F9 /* AddWordView.swift in Sources */,

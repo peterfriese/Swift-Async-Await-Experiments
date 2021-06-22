@@ -23,7 +23,7 @@ struct DefinitionView: View {
 
 struct DefinitionView_Previews: PreviewProvider {
   static var previews: some View {
-    DefinitionView(definition: Word.sample.definitions[0])
+    DefinitionView(definition: Word.sample.definitions![0])
       .previewLayout(.sizeThatFits)
   }
 }

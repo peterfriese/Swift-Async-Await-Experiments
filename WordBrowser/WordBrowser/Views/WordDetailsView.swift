@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+enum WordsAPI: Error {
+  case invalidServerResponse
+}
+
 @MainActor
 class WordDetailsViewModel: ObservableObject {
-  // input
-  @Published var searchTerm = ""
-  
   // output
   @Published private var result = Word.empty
   @Published var isSearching = false
@@ -23,18 +24,19 @@ class WordDetailsViewModel: ObservableObject {
       .assign(to: &$definitions)
   }
   
-  func executeQuery() async {
-    async {
-      isSearching = true
-      // pause 1 second to make the effect more abvious
-      await Task.sleep(1_000_000_000)
-      result = await search(for: searchTerm)
-      isSearching = false
-    }
+  func refresh() async {
   }
   
-  private func buildURLRequest(for term: String) -> URLRequest {
-    let escapedSearchTerm = term.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+  func executeQuery(for searchTerm: String) async {
+    isSearching = true
+    // pause 1 second to make the effect more obvious
+    await Task.sleep(1_000_000_000)
+    result = await search(for: searchTerm)
+    isSearching = false
+  }
+  
+  private func buildURLRequest(for searchTerm: String) -> URLRequest {
+    let escapedSearchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
     let url = URL(string: "https://wordsapiv1.p.rapidapi.com/words/\(escapedSearchTerm)/definitions")!
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
@@ -43,13 +45,17 @@ class WordDetailsViewModel: ObservableObject {
     return request
   }
   
-  private func search(for term: String) async -> Word {
+  private func search(for searchTerm: String) async -> Word {
     // build the request
-    let request = buildURLRequest(for: term)
+    let request = buildURLRequest(for: searchTerm)
     
     do {
-      let (data, _) = try await URLSession.shared.data(for: request)
-      return try Word(data: data)
+      let (data, response) = try await URLSession.shared.data(for: request)
+      guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+        throw WordsAPI.invalidServerResponse
+      }
+      let word = try JSONDecoder().decode(Word.self, from: data)
+      return word
     }
     catch {
       return Word.empty
@@ -60,6 +66,7 @@ class WordDetailsViewModel: ObservableObject {
 
 struct WordDetailsView: View {
   @State var word: String
+  @State var definitions = [Definition]()
   @StateObject var viewModel = WordDetailsViewModel()
   
   var body: some View {
@@ -80,8 +87,7 @@ struct WordDetailsView: View {
     }
     .navigationTitle(word)
     .task {
-      viewModel.searchTerm = word
-      await viewModel.executeQuery()
+      await viewModel.executeQuery(for: word)
     }
   }
 }

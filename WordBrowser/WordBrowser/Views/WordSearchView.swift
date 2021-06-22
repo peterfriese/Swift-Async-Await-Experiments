@@ -12,6 +12,14 @@ class WordsAPIViewModel: ObservableObject {
   @Published var searchTerm: String = ""
   @Published var isSearching = false
   @Published var result = Word.sample
+  @Published var definitions = [Definition]()
+  
+  init() {
+    $result
+      .compactMap { $0.definitions }
+      .assign(to: &$definitions)
+  }
+
   
   func executeQuery() async {
     async {
@@ -52,7 +60,7 @@ struct WordSearchView: View {
       Text(viewModel.result.word)
         .bold()
       Section("Definitions") {
-        ForEach(viewModel.result.definitions) { definition in
+        ForEach(viewModel.definitions) { definition in
           DefinitionView(definition: definition)
         }
       }

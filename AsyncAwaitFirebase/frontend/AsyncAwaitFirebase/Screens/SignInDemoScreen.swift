@@ -29,7 +29,7 @@ class SignInDemoScreenViewModel: ObservableObject {
   }
   
   func signIn() {
-    async {
+    Task {
       do {
         let result = try await Auth.auth().signIn(withEmail: email, password: password)
         self.user = result.user

@@ -5,7 +5,7 @@
 [![Issues][issues-shield]][issues-url]
 [![Discussions][discussions-shield]][discussions-url]
 [![Feature Requests][featurerequest-shield]][featurerequest-url]
-[![License][license-shield]][license-url]
+[![License][license-shield]][license-url
 
 <!-- PROJECT LOGO -->
 <br />
@@ -64,6 +64,9 @@ Unfortunately, you can only select the toolchain on a global level, so keep in m
 ## Breaking changes
 
 As this is still in development, there will be changes. I updated the code to reflect those changes, and wouldn't be surprised to see further breaking changes before a final release is cut. If you run into any issues, feel free to open an issue on this repo (or even better - send a PR if you've got time time to build a solution).
+
+### 2022-11-05
+* Updated the code to use `Task { }` instead of `async { }`
 
 ### 2021-08-06 (WWDC 21)
 * Xcode 13 now contains Swift 5.5, we no longer need to download the experimental compiler toolchain

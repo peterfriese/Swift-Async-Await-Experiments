@@ -20,33 +20,43 @@ struct Todo: Identifiable, Codable {
 
 @available(iOS 15.0, *)
 struct Demo2 {
+  @available(*, renamed: "sayHello(name:)")
+  func sayHello(name: String, completion: @escaping (String) -> Void) {
+    completion("Hello, \(name)")
+  }
+  
+  func sayHello(name: String) async -> String {
+    return await withCheckedContinuation { continuation in
+      sayHello(name: name) { result in
+        continuation.resume(returning: result)
+      }
+    }
+  }
+  
+  
   @available(*, deprecated, message: "Prefer async alternative instead")
-func sayHello(name: String, completion: @escaping (String) -> Void) {
+func fetchTodo(id: Int, completion: @escaping (Todo) -> Void) {
   async {
-    let result = await sayHello(name: name)
+    let result = await fetchTodo(id: id)
     completion(result)
   }
 }
   
   
-func sayHello(name: String) async -> String {
-  return "Hello, \(name)"
-}
+func fetchTodo(id: Int) async -> Todo {
+  let url = URL(string: "https://jsonplaceholder.typicode.com/todos/\(id)")!
   
-  func fetchTodo(id: Int, completion: @escaping (Todo) -> Void) {
-    let url = URL(string: "https://jsonplaceholder.typicode.com/todos/\(id)")!
-    
-    URLSession.shared.dataTask(with: url) { data, response, error in
-      if let data = data {
-        let decoder = JSONDecoder()
-        do {
-          let todo = try decoder.decode(Todo.self, from: data)
-            completion(todo)
-        }
-        catch {
-        }
+  URLSession.shared.dataTask(with: url) { data, response, error in
+    if let data = data {
+      let decoder = JSONDecoder()
+      do {
+        let todo = try decoder.decode(Todo.self, from: data)
+        <#completion#>(todo)
       }
-    }.resume()
-  }
+      catch {
+      }
+    }
+  }.resume()
+}
   
 }

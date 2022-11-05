@@ -49,13 +49,12 @@ class FirestoreDemoScreenViewModel: ObservableObject {
   }
   
   func fetchFavourites() {
-    async {
+    Task {
       do {
         let documentSnapshot = try await self.firestore.collection("favourites").document("sample").getDocument()
-        if let favourites = try documentSnapshot.data(as: Favourites.self) {
-          DispatchQueue.main.async {
-            self.favourites = favourites
-          }
+        let favourites = try documentSnapshot.data(as: Favourites.self)
+        DispatchQueue.main.async {
+          self.favourites = favourites
         }
       }
       catch {

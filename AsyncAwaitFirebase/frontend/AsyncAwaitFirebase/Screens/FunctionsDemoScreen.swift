@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFunctions
 
 @available(iOS 15.0, *)
 @MainActor
@@ -20,10 +21,10 @@ class FunctionsDemoScreenViewModel: ObservableObject {
   init() {
     functions.useEmulator(withHost: "localhost", port: 5001)
   }
-  
+
   func helloWorld() {
     let helloWorldCallable = functions.httpsCallable("helloWorld")
-    async {
+    Task {
       do {
         let result = try await helloWorldCallable.call()
         if let data = result.data as? String {
@@ -71,9 +72,19 @@ class FunctionsDemoScreenViewModel: ObservableObject {
   }
   
   
+func helloUserCallAsFunction() {
+  let helloUserCallable: Callable<String, String> = functions.httpsCallable("helloUser")
+  Task {
+    if let result = try? await helloUserCallable(self.name) {
+      self.message = result
+      self.showResultSheet = true
+    }
+  }
+}
+
   func helloUser() {
     let helloUserCallable = functions.httpsCallable("helloUser")
-    async {
+    Task {
       let result = try? await helloUserCallable.call(self.name)
       if let data = result?.data as? String {
         self.message = data
@@ -106,7 +117,7 @@ class FunctionsDemoScreenViewModel: ObservableObject {
   }
   
   func multipleCalls() {
-    async { [self] in
+    Task { [self] in
       let helloWorldCallable = self.functions.httpsCallable("helloWorld")
       let helloUserCallable = self.functions.httpsCallable("helloUser")
       
@@ -142,6 +153,18 @@ struct FunctionsDemoScreen: View {
         }
         Button("Call helloUser()") {
           viewModel.helloUser()
+        }
+      }
+
+      Section(header: Text("Hello User (callAsFunction)")) {
+        VStack(alignment: .leading) {
+          Text("Name")
+            .font(.caption)
+            .foregroundColor(.accentColor)
+          TextField("Enter your name", text: $viewModel.name)
+        }
+        Button("Call helloUserCallAsFunction()") {
+          viewModel.helloUserCallAsFunction()
         }
       }
       
